@@ -1,0 +1,103 @@
+<form (ngSubmit)="onSubmit()" #invForm="ngForm">
+  <div class="flex input_row">
+    <p>First Name</p>
+    <input
+      type="text"
+      id="firstname"
+      pattern="^[a-z A-Z '-]+$"
+      ngModel
+      name="firstName"
+      required
+    />
+  </div>
+
+  <div class="flex input_row">
+    <p>Last Name</p>
+    <input
+      type="text"
+      id="lastname"
+      ngModel
+      name="lastName"
+      pattern="^[a-z A-Z '-]+$"
+      required
+    />
+  </div>
+
+  <div class="flex input_row">
+    <p>Street Address</p>
+    <input type="text" id="address" ngModel name="address" required />
+  </div>
+
+  <button type="submit" [disabled]="!invForm.valid">Submit Address</button>
+</form>
+
+<form (ngSubmit)="onAdd()" #addForm="ngForm">
+  <div class="flex quantity">
+    <div class="flex">
+      <button type="submit">Add Item</button>
+      <select id="fruits" name="fruits" ngModel>
+        <option value="Apples">Apples</option>
+        <option value="Peaches">Peaches</option>
+        <option value="Pears">Pears</option>
+        <option value="Plums">Plums</option>
+      </select>
+    </div>
+
+    <div class="flex">
+      <p>Qty</p>
+      <input
+        type="text"
+        id="quantity"
+        ngModel
+        name="quantity"
+        pattern="^[0-9]*$"
+        required
+      />
+      <p *ngIf="addErrMsg">{{ addErrMsg }}</p>
+    </div>
+  </div>
+</form>
+
+<div style="margin-left: 20%; margin-bottom: 50px">
+  <table>
+    <tr>
+      <th></th>
+      <th>Qty</th>
+      <th>Unit Price</th>
+      <th>Amount</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let added of added_arr; let i = index">
+      <td>{{ added.fruit }}</td>
+      <td>{{ added.qty }}</td>
+      <td>{{ added.price }}</td>
+      <td>{{ added.amount }}</td>
+      <td (click)="onDelete(i)">Delete</td>
+    </tr>
+    <tr>
+      <td>Subtotal</td>
+      <td></td>
+      <td></td>
+      <td>{{ subtotal }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Taxes 7%</td>
+      <td></td>
+      <td></td>
+      <td>{{ taxes }}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td>{{ total }}</td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div *ngIf="submitted">
+    <p>Order for {{ firstName }} {{ lastName }} at {{ address }}</p>
+  </div>
+</div>

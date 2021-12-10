@@ -1,0 +1,19 @@
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.input_row {
+  width: 300px;
+  justify-content: space-between;
+}
+
+.input_row p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.quantity {
+  width: 400px;
+  justify-content: space-between;
+}

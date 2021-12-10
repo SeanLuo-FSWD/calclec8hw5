@@ -1,0 +1,54 @@
+<form (ngSubmit)="onSubmit()" #fOrM="ngForm">
+  <div>{{ calType }}</div>
+  <div style="display: flex; align-items: flex-start">
+    <div>
+      <div>
+        <input
+          [id]="firstNumberId"
+          type="text"
+          pattern="^[0-9 .]*$"
+          class="form-control"
+          ngModel
+          name="firstNumber"
+          #first_number="ngModel"
+          required
+        />
+      </div>
+      <p *ngIf="first_number?.errors?.pattern">must be a number</p>
+      <!-- <p *ngIf="!firstNumberValid">must be a number</p> -->
+    </div>
+
+    <div class="calSign">
+      {{ sign }}
+    </div>
+
+    <div>
+      <input
+        [id]="secondNumberId"
+        type="text"
+        class="form-control"
+        ngModel
+        name="secondNumber"
+        #second_number="ngModel"
+        pattern="^[0-9 .]*$"
+        required
+      />
+      <p *ngIf="second_number?.errors?.pattern">must be a number</p>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!fOrM.valid">
+      =
+    </button>
+
+    <div class="row" *ngIf="submitted">
+      <div style="display: flex; align-items: flex-end">
+        <div>{{ firstNumberData }}</div>
+        <div>{{ sign }}</div>
+        <div>{{ secondNumberData }}</div>
+        <div>=</div>
+        <div>{{ answer }}</div>
+      </div>
+    </div>
+    <!-- <div *ngIf="!fOrM.valid">Please enter a valid number!</div> -->
+  </div>
+</form>
